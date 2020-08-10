@@ -23,5 +23,19 @@ public class LojaBO {
     }
 
 
+    public LojaEntity parseToEntity(LojaDTO dto, LojaEntity entity){
+        if(entity == null)
+            entity = new LojaEntity();
+
+        if(dto == null)
+            return entity;
+
+        entity.setCodigo(dto.getCodigo());
+        entity.setNome(dto.getNome());
+        entity.setBandeira(dto.getLogomarca());
+        entity.setCidade(dto.getCidade());
+
+        return entity;
+    }
 
 }
