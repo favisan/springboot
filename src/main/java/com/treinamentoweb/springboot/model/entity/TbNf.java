@@ -27,12 +27,6 @@ public class TbNf  implements Serializable {
     @JoinColumn(name = "id_cliente")
     private TbCliente cliente;
 
-//    @Column
-//    private Long idCliente;
-
-//    @Column
-//    private Long cdFilial;
-
     @ManyToOne
     @JoinColumn(name = "cd_filial")
     private TbFilial filial;
@@ -43,8 +37,6 @@ public class TbNf  implements Serializable {
     @Column
     private Long cdTipoNf;
 
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_nf")
     @OneToMany(mappedBy = "nf", cascade = CascadeType.ALL)
     private List<TbNfItem> itens;
 

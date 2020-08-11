@@ -12,15 +12,8 @@ import java.math.BigDecimal;
 @Data
 public class TbNfItem implements Serializable {
 
-//    @Id
-//    @Column(name = "id_nf")
-//    private Long idNf;
-
     @Id
     private Long nrNfItem;
-
-//    @Column
-//    private Long cdProduto;
 
     @Column
     private Long qtItem;
