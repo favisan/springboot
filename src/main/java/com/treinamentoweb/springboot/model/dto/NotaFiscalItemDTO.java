@@ -10,7 +10,7 @@ public class NotaFiscalItemDTO {
 
     private Long nrNfItem;
 
-    private String dsProduto;
+    private Long cdProduto;
 
     private Double vlProduto;
 }

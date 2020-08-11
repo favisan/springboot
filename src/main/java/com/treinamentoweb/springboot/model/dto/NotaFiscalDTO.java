@@ -9,9 +9,17 @@ public class NotaFiscalDTO {
 
     private Long idNf;
 
-    List<NotaFiscalItemDTO> items;
+    private Long cdFornecedor;
+
+    private Long idCliente;
+
+    private Long cdFilial;
 
     private Long nrNf;
+
+    private Long cdTipoNf;
+
+    private List<NotaFiscalItemDTO> items;
 
 
 }

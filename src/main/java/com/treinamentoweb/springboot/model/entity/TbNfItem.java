@@ -1,5 +1,6 @@
 package com.treinamentoweb.springboot.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,9 +12,9 @@ import java.math.BigDecimal;
 @Data
 public class TbNfItem implements Serializable {
 
-    @Id
-    @Column(name = "id_nf")
-    private Long idNf;
+//    @Id
+//    @Column(name = "id_nf")
+//    private Long idNf;
 
     @Id
     private Long nrNfItem;
@@ -37,4 +38,9 @@ public class TbNfItem implements Serializable {
     @JoinColumn(name = "cd_produto")
     private TbProduto produto;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_nf")
+    @JsonIgnore
+    @Id
+    private TbNf nf;
 }

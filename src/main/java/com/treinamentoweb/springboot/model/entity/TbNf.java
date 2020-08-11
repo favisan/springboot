@@ -43,8 +43,9 @@ public class TbNf  implements Serializable {
     @Column
     private Long cdTipoNf;
 
-    @OneToMany
-    @JoinColumn(name = "id_nf")
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_nf")
+    @OneToMany(mappedBy = "nf", cascade = CascadeType.ALL)
     private List<TbNfItem> itens;
 
 }

@@ -16,7 +16,7 @@ public class TbProduto {
     @Column
     private String dsProduto;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cd_tipo_produto")
     private TbTipoProduto tipoProduto;
 

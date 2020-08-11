@@ -4,15 +4,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
 @Data
-public class TbCliente {
+public class TbCliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente")
     private Long idCliente;
 
     @Column
@@ -27,5 +30,11 @@ public class TbCliente {
     @Column
     private Date dtCadastro;
 
+    @ManyToMany
+    @JoinTable(name = "tb_endereco_cliente",
+        joinColumns = @JoinColumn(name = "id_cliente"),
+        inverseJoinColumns = @JoinColumn(name = "id_endereco")
+    )
+    private List<TbEndereco> enderecos;
 
 }
