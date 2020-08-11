@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Table
 @Data
+@NamedQuery(name = "buscarNfPorIdCliente", query = "select n from TbNf n where n.cliente.idCliente  =:idCliente")
 public class TbNf  implements Serializable {
 
     @Id
@@ -45,4 +46,5 @@ public class TbNf  implements Serializable {
     @OneToMany
     @JoinColumn(name = "id_nf")
     private List<TbNfItem> itens;
+
 }
