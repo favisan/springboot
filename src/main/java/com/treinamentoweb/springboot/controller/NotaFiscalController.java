@@ -1,10 +1,15 @@
 package com.treinamentoweb.springboot.controller;
 
 import com.treinamentoweb.springboot.model.dto.NotaFiscalDTO;
+import com.treinamentoweb.springboot.model.dto.ResultData;
+import com.treinamentoweb.springboot.model.entity.TbNf;
 import com.treinamentoweb.springboot.service.NotaFiscalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.xml.transform.Result;
 
 @RestController
 public class NotaFiscalController {
@@ -24,6 +29,23 @@ public class NotaFiscalController {
 
     @PostMapping("/notas")
     public ResponseEntity<Object> salvarNotaFiscal(@RequestBody NotaFiscalDTO notaFiscalDTO){
-        return ResponseEntity.ok().body(service.inserir(notaFiscalDTO));
+        ResultData resultData = null;
+        if(notaFiscalDTO.getCdFilial() == null)
+            resultData = new ResultData(HttpStatus.BAD_REQUEST.value(),"Campo: cdFilial não informado!");
+        else if(notaFiscalDTO.getIdCliente() == null)
+            resultData = new ResultData(HttpStatus.BAD_REQUEST.value(),"Campo: idCliente não informado!");
+
+        if(resultData != null)
+            return ResponseEntity.badRequest().body(resultData);
+        else {
+            try {
+                TbNf notaFiscal = service.inserir(notaFiscalDTO);
+                resultData = new ResultData<TbNf>(HttpStatus.OK.value(), "Nota Fiscal registrada com sucesso!", notaFiscal);
+                return ResponseEntity.status(HttpStatus.CREATED).body(resultData);
+            }catch(Exception e){
+                resultData = new ResultData(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Ocorreu um erro ao registrar NF", e.getMessage());
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resultData);
+            }
+        }
     }
 }
