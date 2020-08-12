@@ -2,6 +2,8 @@ package com.treinamentoweb.springboot.service;
 
 import com.treinamentoweb.springboot.model.dto.NotaFiscalDTO;
 import com.treinamentoweb.springboot.model.dto.NotaFiscalItemDTO;
+import com.treinamentoweb.springboot.model.entity.TbCliente;
+import com.treinamentoweb.springboot.model.entity.TbFilial;
 import com.treinamentoweb.springboot.model.entity.TbNf;
 import com.treinamentoweb.springboot.model.entity.TbNfItem;
 import com.treinamentoweb.springboot.repository.ClienteRepository;
@@ -67,12 +69,23 @@ public class NotaFiscalService {
         return em.createNamedQuery("buscarNfPorIdCliente", TbNf.class).setParameter("idCliente", idCliente).getResultList();
     }
 
-    public TbNf inserir(NotaFiscalDTO nfDTO){
+    public TbNf inserir(NotaFiscalDTO nfDTO) throws Exception{
+        TbCliente cliente = clienteRepository.getOne(nfDTO.getIdCliente());
+        if(cliente == null || cliente.getNmCliente().isEmpty())
+            throw new Exception("IdCliente: " + nfDTO.getIdCliente() + " não encontrado!");
+
+        TbFilial filial = filialRepository.getOne(nfDTO.getCdFilial());
+        if(filial == null)
+            throw new Exception("cdFilial: " + nfDTO.getCdFilial() + " não encontrado!");
+
         TbNf nfEntity = new TbNf();
         nfEntity.setCdFornecedor(nfDTO.getCdFornecedor());
         nfEntity.setCdTipoNf(nfDTO.getCdTipoNf());
-        nfEntity.setCliente(clienteRepository.getOne(nfDTO.getIdCliente()));
-        nfEntity.setFilial(filialRepository.getOne(nfDTO.getCdFilial()));
+
+        nfEntity.setCliente(cliente);
+        nfEntity.setFilial(filial);
+
+
         nfEntity.setNrNf(nfDTO.getNrNf());
 
         List<TbNfItem> itemsEntity = new ArrayList<>();
