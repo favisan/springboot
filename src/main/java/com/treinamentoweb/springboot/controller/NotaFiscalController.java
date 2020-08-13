@@ -29,7 +29,6 @@ public class NotaFiscalController {
 
     @ApiOperation(value = "Listar notas por idCliente")
     @GetMapping("/notas/cliente/{idCliente}")
-    @RolesAllowed(value = "TESTE")
     public ResponseEntity<Object> buscarNfPorTipoProduto(@PathVariable("idCliente") Long idCliente){
         return ResponseEntity.ok().body(service.buscarNfPorIdCliente(idCliente));
     }
