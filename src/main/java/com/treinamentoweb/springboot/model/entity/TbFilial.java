@@ -3,6 +3,7 @@ package com.treinamentoweb.springboot.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -19,4 +20,11 @@ public class TbFilial {
     @Column
     private String nrCnpj;
 
+//    @ManyToMany
+//    @JoinTable(
+//            name = "tb_endereco_filial",
+//            joinColumns = @JoinColumn(name = "cd_filial"),
+//            inverseJoinColumns = @JoinColumn(name = "id_endereco")
+//    )
+//    private List<TbEndereco> enderecos;
 }

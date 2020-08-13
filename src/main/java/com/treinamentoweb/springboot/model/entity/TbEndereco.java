@@ -21,5 +21,8 @@ public class TbEndereco implements Serializable {
 
     @Column
     private String dsCidade;
+//
+//    @ManyToMany(mappedBy = "enderecos")
+//    private List<TbFilial> filiais;
 
 }
