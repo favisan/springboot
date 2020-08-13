@@ -16,8 +16,8 @@ public class LojaController {
     @Autowired
     private LojaService service;
 
-    @GetMapping("/lojas")
     @ApiOperation(value = "Listar todas as lojas")
+    @GetMapping("/lojas")
     public ResponseEntity buscarTodas(){
         return ResponseEntity.ok().body(service.buscarTodas());
     }

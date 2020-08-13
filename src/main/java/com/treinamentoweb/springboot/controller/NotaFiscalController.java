@@ -6,10 +6,12 @@ import com.treinamentoweb.springboot.model.entity.TbNf;
 import com.treinamentoweb.springboot.service.NotaFiscalService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.xml.transform.Result;
 
 @RestController
@@ -24,8 +26,10 @@ public class NotaFiscalController {
         return ResponseEntity.ok().body(service.listarTodas());
     }
 
+
     @ApiOperation(value = "Listar notas por idCliente")
     @GetMapping("/notas/cliente/{idCliente}")
+    @RolesAllowed(value = "TESTE")
     public ResponseEntity<Object> buscarNfPorTipoProduto(@PathVariable("idCliente") Long idCliente){
         return ResponseEntity.ok().body(service.buscarNfPorIdCliente(idCliente));
     }
